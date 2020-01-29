@@ -1,10 +1,10 @@
 {
-	"name": "api",
+	"name": "API_Boilerplate",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"start": "node ./bin/www",
-		"test": "DB_NAME=api_test_db jest"
+		"test": "DB_NAME=boilerplate_test_db jest"
 	},
 	"dependencies": {
 		"body-parser": "^1.19.0",
