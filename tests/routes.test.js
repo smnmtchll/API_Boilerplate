@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("../src/app");
 
 //////////////// --> HOME PAGE AND 404 CHECKS
 describe("Using the home page to check the app is up and running", () => {
