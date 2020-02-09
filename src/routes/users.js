@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { prisma } = require('../generated/prisma-client');
 const bcrypt = require('bcrypt');
-
 const { check, validationResult, sanitizeBody } = require('express-validator');
 
 /* GET all users */
@@ -23,7 +22,7 @@ const { check, validationResult, sanitizeBody } = require('express-validator');
 router.get('/:id', async (req, res) => {
     // Gather the id from the request parameters
     const userId = req.params.id;
-    const fragment = `
+    const userWithoutPasswordFragment = `
         fragment UserWithoutPassword on User {
             id
             name
@@ -32,7 +31,9 @@ router.get('/:id', async (req, res) => {
     `;
     // Run the query
     try {
-        const user = await prisma.user({ id: userId }).$fragment(fragment);
+        const user = await prisma
+            .user({ id: userId })
+            .$fragment(userWithoutPasswordFragment);
         if (!user) {
             res.sendStatus(404);
         }

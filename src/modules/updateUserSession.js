@@ -6,10 +6,7 @@ updateUserSession = async userId => {
             connect: { id: userId },
         },
     });
-    if (!newSession) {
-        return false;
-    }
-    return true;
+    return newSession ? true : false;
 };
 
 module.exports = updateUserSession;
