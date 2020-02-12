@@ -1,30 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const { prisma } = require('../generated/prisma-client');
-const updateUserSession = require('../modules/updateUserSession');
-
-const { check, validationResult, sanitizeBody } = require('express-validator');
+const authService = require('../services/auth.service');
+const userService = require('../services/user.service');
 
 /* POST login credentials */
 router.post('/login', async (req, res) => {
     try {
-        const thisUser = await prisma.user({ email: req.body.email }); // Gather user permissions here
+        // Retrieve the user
+        const thisUser = await userService.findUserByEmail(req.body.email);
         if (!thisUser) {
             throw new Error('No user exists with that email address');
         }
-        const matchPassword = await bcrypt.compare(
+
+        // Check the password matches
+        const matchPassword = await authService.comparePasswords(
             req.body.password,
             thisUser.password
         );
         if (!matchPassword) {
             throw new Error('The password is incorrect');
         }
-        const session = updateUserSession(thisUser.id);
+
+        // Delete the password from the object so it is not returned to the client
+        delete thisUser.password;
+
+        // Create a new user session
+        const session = await authService.upsertUserSession(thisUser.id);
         if (!session) {
             return res.status(500);
         }
-        thisUser.password = null;
+
+        // Return the user details
         res.json(thisUser);
     } catch (error) {
         res.json(error);
