@@ -1,8 +1,14 @@
-# Welcome to my Node, Express, MySQL Boilerplate.
+# Welcome to my Node, Express, Prisma, MySQL Boilerplate.
 
 This template is intended as a starting point for future applications. It sets up an api structure on which to build from.
 
-Before running the server you will need to create two databases. One for running tests on and one for interacting with the running application. Both databases can be created using the createDB.sql file in the root directory (to be created as yet!!).
+Before running the server you will need to deploy and generate the Docker containers for Prisma and MySQL.
+
+```shell
+# From inside ./api/prisma
+$ prisma deploy
+$ prisma generate
+```
 
 To run tests from the api directrory run:
 
@@ -41,8 +47,4 @@ POST Request -> 'http://api.mydomain/api/users?username=barry&email_address=barr
 
 ## Road Map
 
-- Create the sql file for setting up the required databases
-- Implement Prisma and GraphQL
-- Create test db seeding file (testSeeding.sql) and run in beforeAll tests script.
-- Configure Body-Parser to accept json objects
-- Implement a robust authentication with JWT and an api key
+- Add authentication
