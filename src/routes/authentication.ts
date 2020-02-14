@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 const authService = require('../services/auth.service');
 const userService = require('../services/user.service');
 
 /* POST login credentials */
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: express.Request, res: express.Response) => {
     try {
         // Retrieve the user
         const thisUser = await userService.findUserByEmail(req.body.email);

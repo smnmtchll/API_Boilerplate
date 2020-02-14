@@ -1,5 +1,5 @@
-const request = require('supertest');
-const app = require('../src/app');
+import request from 'supertest';
+import app from '../app';
 
 //////////////// --> HOME PAGE AND 404 CHECKS
 describe('Using the home page to check the app is up and running', () => {
