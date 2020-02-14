@@ -1,6 +1,7 @@
 dist
 node_modules
 src/generated
+logs
 .prettierrc
 .DS_Store
 *.log
