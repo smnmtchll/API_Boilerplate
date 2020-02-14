@@ -10,7 +10,7 @@ const app = express();
 
 app.listen(3000, () =>
     // tslint:disable-next-line:no-console
-    console.log('Server is running on http://localhost:3000')
+    winston.info('Server is running on http://localhost:3000')
 );
 
 app.use(bodyParser.json());
