@@ -4,7 +4,7 @@ interface Error {
     message?: string;
 }
 import bodyParser from 'body-parser';
-import logger from 'morgan';
+import winston from './winston';
 
 const app = express();
 
@@ -14,7 +14,12 @@ app.listen(3000, () =>
 );
 
 app.use(bodyParser.json());
-app.use(logger('dev'));
+
+// Log request activity with Winston
+app.use((req: express.Request, res: express.Response, done) => {
+    winston.info(req.originalUrl);
+    done();
+});
 
 import indexRouter from './routes/index';
 import authenticationRouter from './routes/authentication';
