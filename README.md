@@ -1,28 +1,30 @@
 # Welcome to my Node, Express, Prisma, MySQL Boilerplate.
 
-This template is intended as a starting point for future applications. It sets up an api structure on which to build from.
+This template is intended as a starting point for future applications. It sets up an API structure with basic User and Authentication routes as a platform on which to build from.
 
-Before running the server you will need to deploy and generate the Docker containers for Prisma and MySQL.
+### Files are written in Typescript. Testing follows TDD principles,unit tests implented with Jest
 
-```shell
-# From inside ./api/prisma
-$ prisma deploy
-$ prisma generate
-```
+> **DISCLAIMER:** This codebase is not complete and is not recommended for production.
 
-To run tests from the api directrory run:
+> **COMING SOON:** I will be building a similar boilerplate with the initial stucture for a front end platform, using **React** and **Redux**.
+
+> **REQUIREMENTS:** The following instructions assume you have **Node** and **Docker** installed on your local machine.
+
+To begin, clone the repo to your desktop and run the following commands:
 
 ```terminal
-npm install
-npm test
+$ npm install   # Install the dependencies from the package.json file
+$ prisma deploy # Deploy and generate Prisma
+$ npm run dev   # Start the Node server in dev mode
+```
+
+To run tests:
+
+```javascript
+$ npm test  /* Recommend setting up Jenkins to auto run tests on a pull request trigger */
 ```
 
 To start the server, cd into the api directory and run:
-
-```terminal
-npm install
-npm start
-```
 
 ## Routes
 
@@ -31,20 +33,13 @@ GET '/' /* Returns a 200 status code and a json object containing 'Home' as a ti
 ```
 
 ```javascript
-GET  'api/users'        /* Returns an array of all users */
-GET  'api/users/:id'    /* Returns a single user based on the supplied id */
-POST 'api/users'        /* Creates a new user — See below for further instructions */
-POST 'api/users/login'  /* Authenticates a user and returns a JWT token (yet to be built) */
-```
-
-## Creating a new user
-
-To create a new user you must pass an alphanumeric username no shorter than 4 characters long and a valid email address. For example:
-
-```javascript
-POST Request -> 'http://api.mydomain/api/users?username=barry&email_address=barry@manilow.com'
+GET  '/users/:id'   /* Returns a single user based on the supplied id */
+POST '/users'       /* Creates a new user */
+POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ```
 
 ## Road Map
 
-- Add authentication
+-   Add [Redis](https://redislabs.com/) for persisting user session data
+-   Implement [Pino](https://www.npmjs.com/package/pino) for error tracking
+-   Refactor services to be OOP Classes
