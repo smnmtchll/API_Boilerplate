@@ -16,9 +16,9 @@ app.listen(3000, () =>
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-const indexRouter = require('./routes/index');
-const authenticationRouter = require('./routes/authentication');
-const usersRouter = require('./routes/users');
+import indexRouter from './routes/index';
+import authenticationRouter from './routes/authentication';
+import usersRouter from './routes/users';
 
 app.use('/', indexRouter);
 app.use('/auth', authenticationRouter);

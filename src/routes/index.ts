@@ -10,4 +10,4 @@ router.get('/', function(
     res.status(200).send({ title: 'Home' });
 });
 
-module.exports = router;
+export default router;

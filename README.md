@@ -43,3 +43,4 @@ POST '/auth/login'  /* Authenticates a user and creates a user session record */
 -   Add [Redis](https://redislabs.com/) for persisting user session data
 -   Implement [Pino](https://www.npmjs.com/package/pino) for error tracking
 -   Refactor services to be OOP Classes
+-   Add authentication middleware
