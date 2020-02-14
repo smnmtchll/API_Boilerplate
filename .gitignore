@@ -1,4 +1,6 @@
 dist
 node_modules
 src/generated
-.prettierrc.DS_Store
+.prettierrc
+.DS_Store
+
