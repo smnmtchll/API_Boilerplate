@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { prisma } = require('../generated/prisma-client');
-const bcrypt = require('bcrypt');
-const { check, validationResult, sanitizeBody } = require('express-validator');
+import { prisma } from '../generated/prisma-client';
+import bcrypt from 'bcrypt';
+import { check, validationResult, sanitizeBody } from 'express-validator';
 
 /* GET all users */
 // router.get('/', async (req, res) => {
@@ -19,7 +19,7 @@ const { check, validationResult, sanitizeBody } = require('express-validator');
 // });
 
 /* GET a user */
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: express.Request, res: express.Response) => {
     // Gather the id from the request parameters
     const userId = req.params.id;
     const userWithoutPasswordFragment = `
@@ -58,12 +58,11 @@ router.post(
             .escape(),
         check('email')
             .isEmail()
-            .withMessage('You must enter a valid email.')
-            .normalizeEmail({ lowercase: true }),
+            .withMessage('You must enter a valid email.'),
         check('password')
             .isLength({ min: 8 })
             .withMessage('Passwords must be at least 8 characters long.')
-            .custom((value, { req, loc, path }) => {
+            .custom((value, { req }) => {
                 if (value !== req.body.confirmPassword) {
                     // Throw error if passwords do not match
                     throw new Error('Passwords do not match');
@@ -74,7 +73,7 @@ router.post(
             .trim()
             .escape(),
     ],
-    async (req, res) => {
+    async (req: express.Request, res: express.Response) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
@@ -94,4 +93,4 @@ router.post(
     }
 );
 
-module.exports = router;
+export default router;
