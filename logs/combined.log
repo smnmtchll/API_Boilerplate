@@ -1,3 +1,71 @@
 {"message":"Error: Test","level":"error"}
 {"message":"Server is running on http://localhost:3000","level":"info"}
 {"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/auth/login","level":"info"}
+{"message":"/auth/logins","level":"info"}
+{"message":"404 - Not found - /auth/logins - POST - ::1","level":"error"}
+{"message":"/auth/login","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/auth/login","level":"info"}
+{"message":"/auth/logins","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/auth/logins","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/auth/logins","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/users/ck6f3c95d00ib077286gsq2v3---","level":"info"}
+{"level":"error","message":"Error: A user was not found with this id: "}
+{"message":"Error: Routes.Authentication","error":{"code":"ERR_HTTP_HEADERS_SENT"},"level":"error"}
+{"message":"/users/","level":"info"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp","level":"info"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp6","level":"info"}
+{"level":"error","message":"Error: A user was not found with this id: "}
+{"message":"Error: Routes.Authentication","error":{"code":"ERR_HTTP_HEADERS_SENT"},"level":"error"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp6","level":"info"}
+{"message":"Error: A user was not found with this id","level":"error"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp6","level":"info"}
+{"message":"Error: A user was not found with this id","level":"warn"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp6","level":"info"}
+{"message":"Error: A user was not found with this id","level":"warn"}
+{"message":"/users/ck6ngm4mf001v0772oks2yvqp","level":"info"}
+{"message":"/users/","level":"info"}
+{"message":"Error: Routes.Users.Post","error":{"errors":[{"value":"Testing123","msg":"Passwords do not match","param":"password","location":"body"}]},"level":"warn"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}
+{"message":"Server is running on http://localhost:3000","level":"info"}

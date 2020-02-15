@@ -35,7 +35,10 @@ app.use(function(
     res: express.Response,
     next: express.NextFunction
 ) {
-    const err = new Error('Not Found');
+    const err = {
+        status: 404,
+        message: 'Not found',
+    };
     res.status(404);
     next(err);
 });
@@ -48,6 +51,20 @@ app.use(
         res: express.Response,
         next: express.NextFunction
     ) => {
+        if (res.headersSent) {
+            return next(err);
+        }
+        // set locals, only providing error in development
+        res.locals.message = err.message;
+        res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+        winston.error(
+            `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
+                req.method
+            } - ${req.ip}`
+        );
+
+        // Return the error
         res.sendStatus(err.status || 500);
     }
 );

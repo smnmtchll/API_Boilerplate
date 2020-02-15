@@ -1,4 +1,5 @@
 import { prisma } from '../generated/prisma-client';
+import winston from '../winston';
 
 // CAUTION: This returns a user object to include the password
 //          (required for login). Make sure to delete the
@@ -7,7 +8,10 @@ exports.findUserByEmail = async (email: string) => {
     try {
         const thisUser = await prisma.user({ email: email });
         return thisUser ? thisUser : false;
-    } catch (e) {
-        throw Error('Error while retrieving user by email');
+    } catch (err) {
+        winston.error({
+            message: 'Error: Services.User.findUserByEmail',
+            error: err,
+        });
     }
 };
