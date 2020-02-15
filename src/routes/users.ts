@@ -3,20 +3,7 @@ const router = express.Router();
 import { prisma } from '../generated/prisma-client';
 import bcrypt from 'bcrypt';
 import { check, validationResult, sanitizeBody } from 'express-validator';
-
-/* GET all users */
-// router.get('/', async (req, res) => {
-//     // const allUsers = await prisma.users();
-//     const fragment = `
-//         fragment UsersWithoutPassword on User {
-//             id
-//             name
-//             email
-//         }
-//     `;
-//     const UsersWithoutPassword = await prisma.users().$fragment(fragment);
-//     res.json(UsersWithoutPassword);
-// });
+import winston from '../winston';
 
 /* GET a user */
 router.get('/:id', async (req: express.Request, res: express.Response) => {
@@ -35,11 +22,16 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
             .user({ id: userId })
             .$fragment(userWithoutPasswordFragment);
         if (!user) {
-            res.sendStatus(404);
+            winston.warn('Error: A user was not found with this id');
+            res.status(404);
         }
         res.json(user);
-    } catch (error) {
-        res.json(error);
+    } catch (err) {
+        winston.error({
+            message: 'Error: Routes.Authentication',
+            error: err,
+        });
+        res.sendStatus(err.status || 500);
     }
 });
 
@@ -76,6 +68,10 @@ router.post(
     async (req: express.Request, res: express.Response) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            winston.warn({
+                message: 'Error: Routes.Users.Post',
+                error: errors,
+            });
             return res.status(422).json({ errors: errors.array() });
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -87,8 +83,12 @@ router.post(
         try {
             const createdUser = await prisma.createUser(newUser);
             res.json(createdUser);
-        } catch (error) {
-            res.json(error);
+        } catch (err) {
+            winston.error({
+                message: 'Error: Routes.Users',
+                error: err,
+            });
+            res.sendStatus(err.status || 500);
         }
     }
 );

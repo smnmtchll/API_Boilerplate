@@ -7,6 +7,7 @@ const logger = winston.createLogger({
         new winston.transports.Console(),
         new winston.transports.File({ filename: './logs/combined.log' }),
     ],
+    exitOnError: false,
 });
 
 export default logger;

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { prisma } from '../generated/prisma-client';
+import winston from '../winston';
 
 exports.upsertUserSession = async (userId: string) => {
     try {
@@ -9,8 +10,11 @@ exports.upsertUserSession = async (userId: string) => {
             },
         });
         return newSession ? true : false;
-    } catch (e) {
-        throw Error('Error while upserting new user session');
+    } catch (err) {
+        winston.error({
+            message: 'Error: Services.Auth.upsertUserSession',
+            error: err,
+        });
     }
 };
 
@@ -21,7 +25,10 @@ exports.comparePasswords = async (
     try {
         const matchPassword = bcrypt.compare(testPassword, storedPassword);
         return matchPassword ? true : false;
-    } catch (e) {
-        throw Error('Error while upserting new user session');
+    } catch (err) {
+        winston.error({
+            message: 'Error: Services.Auth.comparePasswords',
+            error: err,
+        });
     }
 };
