@@ -3,12 +3,15 @@ type User {
   email: String! @unique
   name: String
   password: String
+  username: String
 }
 
 type Session {
   id: ID! @id
+  dummy: String! @default(value: "new")
   user: User!
   createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Permissions {
