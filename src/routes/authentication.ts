@@ -1,45 +1,46 @@
 import express from 'express';
 const router = express.Router();
-const authService = require('../services/auth.service');
-const userService = require('../services/user.service');
 import winston from '../winston';
+import AuthService from '../services/auth.service';
+import SessionService from '../services/session.service';
+import UserService from '../services/user.service';
 
 /* POST login credentials */
 router.post('/login', async (req: express.Request, res: express.Response) => {
     try {
-        // Retrieve the user
-        const thisUser = await userService.findUserByEmail(req.body.email);
-        if (!thisUser) {
-            winston.warn('Error: Routes.Authentication.findUserByEmail');
+        // Define the incoming constants
+        const email = req.body.email;
+        const password = req.body.password;
+        // Make sure an email and password were supplied
+        if (!email || !password) {
+            winston.info({
+                message: `Error: Routes.Authentication.Login - Someone tried to login without providing an email and password`,
+            });
+            res.status(401);
+            throw new Error('An email and password are required');
         }
-
-        // Check the password matches
-        const matchPassword = await authService.comparePasswords(
-            req.body.password,
-            thisUser.password
-        );
-        if (!matchPassword) {
-            winston.warn('Error: Routes.Authentication.comparePasswords');
+        // Find the user
+        const existingUser = await UserService.findUserByEmail(email);
+        // Check the password matches if a user is found
+        if (existingUser) {
+            await AuthService.comparePasswords(
+                password,
+                existingUser.password!
+            );
+            delete existingUser.password;
+            // Create a new user session
+            await SessionService.upsertUserSession(existingUser.id);
+            if (!SessionService) {
+                throw new Error('There was a problem with the user session');
+            }
+            // Return the user details
+            res.json(existingUser);
         }
-
-        // Delete the password from the object so it is not returned to the client
-        delete thisUser.password;
-
-        // Create a new user session
-        const session = await authService.upsertUserSession(thisUser.id);
-        if (!session) {
-            winston.warn('Error: New user session not created');
-            return res.status(500);
-        }
-
-        // Return the user details
-        res.json(thisUser);
     } catch (err) {
         winston.error({
-            message: 'Error: Routes.Authentication',
-            error: err,
+            message: `Error: Routes.Authentication - ${err.message}`,
         });
-        res.sendStatus(err.status || 500);
+        res.sendStatus(401);
     }
 });
 
