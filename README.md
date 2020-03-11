@@ -2,7 +2,7 @@
 
 This template is intended as a starting point for future applications. It sets up an API structure with basic User and Authentication routes as a platform on which to build from.
 
-### Files are written in Typescript. Testing follows TDD principles,unit tests implented with Jest
+### Files are written in Typescript. Testing follows TDD principles, unit tests implented with Jest
 
 > **DISCLAIMER:** This codebase is not complete and is not recommended for production.
 
@@ -24,8 +24,6 @@ To run tests:
 $ npm test  /* Recommend setting up Jenkins to auto run tests on a pull request trigger */
 ```
 
-To start the server, cd into the api directory and run:
-
 ## Routes
 
 ```javascript
@@ -41,6 +39,4 @@ POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ## Road Map
 
 -   Add [Redis](https://redislabs.com/) for persisting user session data
--   Implement [Pino](https://www.npmjs.com/package/pino) for error tracking
--   Refactor services to be OOP Classes
 -   Add authentication middleware
