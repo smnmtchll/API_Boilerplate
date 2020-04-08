@@ -19,6 +19,24 @@ const findSession = async (userId: string) => {
     return sessionResponse.sessions[0] ? sessionResponse.sessions[0] : false;
 };
 
+const authenticateSession = async (userId: string) => {
+    if (!userId) {
+        throw new Error('A User ID must be supplied to authenticate a session');
+    }
+    const session = await findSession(userId);
+    if (!session) {
+        throw new Error('No session exists for that user');
+    }
+    const now = new Date();
+    const updatedAt = new Date(session.updatedAt);
+    updatedAt.setHours(updatedAt.getHours() + 1);
+    if (now.getTime() < updatedAt.getTime()) {
+        updateExistingSession(session.id);
+        return true;
+    }
+    return false;
+};
+
 const createNewSession = async (userId: string) => {
     if (!userId) {
         throw new Error('A User ID must be supplied to create a Session');
@@ -77,6 +95,7 @@ const deleteSession = async (sessionId: string) => {
 export default {
     upsertUserSession,
     findSession,
+    authenticateSession,
     createNewSession,
     updateExistingSession,
     deleteSession,

@@ -24,16 +24,18 @@ To run tests:
 $ npm test  /* Recommend setting up Jenkins to auto run tests on a pull request trigger */
 ```
 
-## Routes
+## Public Routes
 
 ```javascript
 GET '/' /* Returns a 200 status code and a json object containing 'Home' as a title attribute. */
+POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ```
+
+## Protected Routes
 
 ```javascript
 GET  '/users/:id'   /* Returns a single user based on the supplied id */
 POST '/users'       /* Creates a new user */
-POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ```
 
 ## Road Map

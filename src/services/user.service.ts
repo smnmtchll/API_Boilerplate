@@ -1,7 +1,6 @@
 import { prisma } from '../generated/prisma-client';
 import winston from '../winston';
 import bcrypt from 'bcrypt';
-import auth from './auth.service';
 
 // CAUTION: This returns a user object to include the password
 //          (required for authentication). Make sure to delete the

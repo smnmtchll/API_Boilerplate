@@ -5,11 +5,11 @@ interface Error {
 }
 import bodyParser from 'body-parser';
 import winston from './winston';
+import SessionService from './services/session.service';
 
 const app = express();
 
 app.listen(3000, () =>
-    // tslint:disable-next-line:no-console
     winston.info('Server is running on http://localhost:3000')
 );
 
@@ -21,13 +21,31 @@ app.use((req: express.Request, res: express.Response, done) => {
     done();
 });
 
+// Authentication middleware
+const isAuthenticated = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+) => {
+    const userId = req.body.userId;
+    const authenticated = await SessionService.authenticateSession(userId);
+    if (authenticated) {
+        try {
+            return next();
+        } catch (err) {
+            winston.error(`${err.status || 500} - ${err.message}`);
+        }
+    }
+    res.redirect('/');
+};
+
 import indexRouter from './routes/index';
 import authenticationRouter from './routes/authentication';
 import usersRouter from './routes/users';
 
 app.use('/', indexRouter);
 app.use('/auth', authenticationRouter);
-app.use('/users', usersRouter);
+app.use('/users', isAuthenticated, usersRouter);
 
 // Catch 404
 app.use(function(
