@@ -27,7 +27,7 @@ $ npm test  /* Recommend setting up Jenkins to auto run tests on a pull request 
 ## Public Routes
 
 ```javascript
-GET '/' /* Returns a 200 status code and a json object containing 'Home' as a title attribute. */
+GET '/'             /* Returns a 403 status code. */
 POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ```
 

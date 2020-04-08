@@ -7,7 +7,7 @@ router.get('/', function(
     res: express.Response,
     next: express.NextFunction
 ) {
-    res.status(200).send({ title: 'Home' });
+    res.status(403).send({ error: 'You must log in.' });
 });
 
 export default router;
