@@ -5,9 +5,12 @@ interface Error {
 }
 import bodyParser from 'body-parser';
 import winston from './winston';
+import cors from 'cors';
 import SessionService from './services/session.service';
 
 const app = express();
+
+app.use(cors());
 
 app.listen(3000, () =>
     winston.info('Server is running on http://localhost:3000')
