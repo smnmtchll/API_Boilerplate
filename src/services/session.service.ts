@@ -79,9 +79,7 @@ const upsertUserSession = async (userId: string) => {
         return newSession ? true : false;
     } else {
         // Update the existing session
-        const updatedSession = await updateExistingSession(
-            sessionExists.sessions[0].id
-        );
+        const updatedSession = await updateExistingSession(sessionExists.id);
         return updatedSession ? true : false;
     }
 };

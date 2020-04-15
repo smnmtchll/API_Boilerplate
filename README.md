@@ -27,7 +27,7 @@ $ npm test  /* Recommend setting up Jenkins to auto run tests on a pull request 
 ## Public Routes
 
 ```javascript
-GET '/'             /* Returns a 403 status code. */
+GET  '/'            /* Returns a 403 status code. */
 POST '/auth/login'  /* Authenticates a user and creates a user session record */
 ```
 
@@ -37,8 +37,3 @@ POST '/auth/login'  /* Authenticates a user and creates a user session record */
 GET  '/users/:id'   /* Returns a single user based on the supplied id */
 POST '/users'       /* Creates a new user */
 ```
-
-## Road Map
-
--   Add [Redis](https://redislabs.com/) for persisting user session data
--   Add authentication middleware
